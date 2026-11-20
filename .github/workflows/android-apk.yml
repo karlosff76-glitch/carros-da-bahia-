@@ -1,0 +1,34 @@
+
+name: Gerar APK - Carros da Bahia
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.3.0
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Preparar pasta
+        run: mkdir -p build
+
+      - name: Importar projeto
+        run: godot --headless --editor --path . --quit
+
+      - name: Gerar APK Android
+        run: godot --headless --path . --export-debug "Android" build/Carros_da_Bahia.apk
+
+      - name: Salvar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Carros-da-Bahia-APK
+          path: build/Carros_da_Bahia.apk
+          
