@@ -17,14 +17,43 @@ jobs:
       - name: Baixar projeto
         uses: actions/checkout@v4
 
-      - name: Preparar pasta
-        run: mkdir -p build
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Instalar ferramentas Android
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager \
+            "platform-tools" \
+            "platforms;android-33" \
+            "platforms;android-34" \
+            "build-tools;33.0.2" \
+            "build-tools;34.0.0" \
+            "cmdline-tools;latest" \
+            "cmake;3.10.2.4988404" \
+            "ndk;23.2.8568313"
+
+      - name: Instalar templates Godot 4.3
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/4.3.stable
+          curl -L \
+            https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz \
+            -o templates.tpz
+          unzip -o templates.tpz -d ~/.local/share/godot/export_templates/4.3.stable
 
       - name: Importar projeto
         run: godot --headless --editor --path . --quit
 
       - name: Gerar APK Android
-        run: godot --headless --path . --export-debug "Android" build/Carros_da_Bahia.apk
+        run: |
+          mkdir -p build
+          godot --headless --path . --export-debug "Android" build/Carros_da_Bahia.apk
 
       - name: Salvar APK
         uses: actions/upload-artifact@v4
