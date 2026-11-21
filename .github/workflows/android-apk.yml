@@ -39,7 +39,7 @@ jobs:
             "cmake;3.10.2.4988404" \
             "ndk;23.2.8568313"
 
-            - name: Instalar templates Godot 4.3
+      - name: Instalar templates Godot 4.3
         run: |
           mkdir -p ~/.local/share/godot/export_templates/4.3.stable
           curl -fL https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz -o /tmp/templates.tpz
