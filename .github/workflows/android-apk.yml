@@ -41,6 +41,8 @@ jobs:
 
       - name: Instalar templates Godot 4.3
         run: |
+          apt-get update
+          apt-get install -y curl unzip
           mkdir -p ~/.local/share/godot/export_templates/4.3.stable
           curl -fL https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz -o /tmp/templates.tpz
           mkdir -p /tmp/godot-templates
