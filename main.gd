@@ -100,7 +100,7 @@ func _spawn_car(car_name: String, pos: Vector3, color: Color):
     var car = CharacterBody3D.new()
     car.name = car_name
     car.position = pos
-    car.set_script(preload("res://scripts/vehicle.gd"))
+    car.set_script(preload("res://vehicle.gd"))
     car.set_meta("vehicle_name", car_name)
     add_child(car)
 
