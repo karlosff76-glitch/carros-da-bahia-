@@ -54,7 +54,7 @@ jobs:
       - name: Gerar APK Android
         run: |
           mkdir -p build
-          godot --headless --path . --export-debug "Android" build/Carros_da_Bahia.apk
+          godot --headless --path . --install-android-build-template --export-debug "Android" "build/Carros_da_Bahia.apk"
 
       - name: Salvar APK
         uses: actions/upload-artifact@v4
