@@ -1,6 +1,6 @@
 extends Node3D
 
-const PLAYER_SCRIPT = preload("res://scripts/player.gd")
+const PLAYER_SCRIPT = preload("res://player.gd")
 
 var player
 var hud
